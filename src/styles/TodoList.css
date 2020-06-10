@@ -1,7 +1,24 @@
-.TodoList{
-    background: #111111;
-    padding: 1rem;
-    -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
--moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+.TodoList {
+  background: #111111;
+  padding: 3rem;
+  color: #ccc;
+  -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+}
+
+.TodoList button {
+  margin-top: 2rem;
+  height: 2rem;
+  background: #222222;
+  color: #ccc;
+  font-size: 1.5rem;
+  outline: none;
+  border: none;
+
+}
+
+.TodoList button:hover{
+    color: #222222;
+    background: #ccc;
 }

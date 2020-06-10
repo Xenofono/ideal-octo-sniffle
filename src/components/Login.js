@@ -19,7 +19,7 @@ export default function Login(props) {
     };
     const validLogin = await login(userInfo);
     if (validLogin) {
-        sessionStorage.setItem("login", "yes")
+      sessionStorage.setItem("login", "yes");
       props.changeLogin();
     } else {
       alert(
