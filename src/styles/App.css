@@ -1,0 +1,13 @@
+body{
+    margin: 0;
+}
+
+.App{
+    width: 100vw;
+    height: 100vh;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(#b7f8DB, #50a7c2);
+
+}
