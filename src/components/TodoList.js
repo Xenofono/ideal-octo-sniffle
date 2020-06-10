@@ -10,7 +10,7 @@ const TodoList = (props) => {
 
   useEffect(() => {
     const fetchTodos = async () => {
-      const todosArray = await getAllTodos();
+      const todosArray = await getAllTodos(props.username);
       await setTodos(todosArray);
       await setLoaded(true);
     };

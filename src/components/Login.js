@@ -20,7 +20,7 @@ export default function Login(props) {
     const validLogin = await login(userInfo);
     if (validLogin) {
       sessionStorage.setItem("login", "yes");
-      props.changeLogin();
+      props.changeLogin(nameInput);
     } else {
       alert(
         `Felaktigt användarnamn eller lösenord angivet för användare ${userInfo.username}`

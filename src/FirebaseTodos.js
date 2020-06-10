@@ -1,7 +1,7 @@
-const DB_URL = "https://sti-todo-app.firebaseio.com/todos";
+const DB_URL = "https://sti-todo-app.firebaseio.com/users";
 
-export const getAllTodos = async () => {
-  const response = await fetch(DB_URL + ".json");
+export const getAllTodos = async (username) => {
+  const response = await fetch(`${DB_URL}/${username}/todos.json`);
   const data = await response.json();
   const todoArray = [];
   Object.entries(data).forEach((todo) => {
@@ -48,11 +48,11 @@ export const handleDeleteTodo = async (todo) => {
   };
 
 // const todo = {
-//     content: "Lära sig react",
+//     content: "react",
 //     done: false,
 // }
 
-// fetch("https://sti-todo-app.firebaseio.com/todos"+".json", {
+// fetch("https://sti-todo-app.firebaseio.com/users/kristoffer/todos"+".json", {
 //     method: "POST",
 //     body: JSON.stringify(todo)
 // })

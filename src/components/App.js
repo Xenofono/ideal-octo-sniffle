@@ -7,8 +7,9 @@ import Login from "./Login";
 const App = () => {
   const alreadyLoggedIn = sessionStorage.getItem("login") === "yes";
   const [login, setLogin] = useState(alreadyLoggedIn);
+  const [username, setUsername] = useState('')
 
-  const changeLoginState = () => {
+  const changeLoginState = (name) => {
     if(login){
       const confirmLogout = confirm("Är du säker du vill logga ut?")
       if (confirmLogout) {
@@ -17,16 +18,21 @@ const App = () => {
       }
     }
     else{
-      setLogin(!login);
+      console.log(name)
+      setLogin(oldState => {
+        setUsername(name)
+        return !oldState
+      });
 
     }
     
   };
 
+
   const toShow = login ? (
-    <TodoList changeLogin={changeLoginState} />
+    <TodoList changeLogin={changeLoginState} username={username}/>
   ) : (
-    <Login changeLogin={changeLoginState} />
+    <Login changeLogin={changeLoginState}  />
   );
 
   return <div className="App">{toShow}</div>;

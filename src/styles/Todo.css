@@ -5,11 +5,14 @@
   margin-top: 2rem;
   padding: 1rem;
   position: relative;
+  min-width:15rem;
 }
 
 .icon {
   position: absolute;
   font-size: 1.5rem;
+  left: 15.8rem;
+
 }
 
 .icon:hover,
@@ -22,12 +25,10 @@
 
 .remove {
   top: -20px;
-  left: 190px;
 }
 
 .edit {
   top: 50px;
-  left: 190px;
 }
 
 .Todo {
