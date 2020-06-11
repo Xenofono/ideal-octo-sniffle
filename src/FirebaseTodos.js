@@ -4,8 +4,8 @@ export const getAllTodos = async (username) => {
   const response = await fetch(`${DB_URL}/${username}/todos.json`);
   const data = await response.json();
   const todoArray = [];
+  if(!data) return Promise.resolve(todoArray)
   Object.entries(data).forEach((todo) => {
-    const [id, value] = todo;
     const todoObj = {
       id: todo[0],
       content: todo[1].content,

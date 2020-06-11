@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../styles/Login.css";
-import { login } from "../FirebaseLogin";
+import { login, newAccount } from "../FirebaseLogin";
 
 export default function Login(props) {
   const [nameInput, setNameInput] = useState("");
@@ -42,6 +42,11 @@ export default function Login(props) {
           onChange={(e) => setPasswordInput(e.target.value)}
           placeholder="Lösenord"></input>
         <input type="submit" value="Logga in" onClick={onClick}></input>
+      <button onClick={(e) => {
+        e.preventDefault()
+        newAccount()
+      }}>Nytt konto</button>
+
       </form>
     </div>
   );

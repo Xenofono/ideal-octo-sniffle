@@ -7,32 +7,29 @@ import Login from "./Login";
 const App = () => {
   const alreadyLoggedIn = sessionStorage.getItem("login") === "yes";
   const [login, setLogin] = useState(alreadyLoggedIn);
-  const [username, setUsername] = useState('')
+  const [username, setUsername] = useState("");
 
   const changeLoginState = (name) => {
-    if(login){
-      const confirmLogout = confirm("Är du säker du vill logga ut?")
+    if (login) {
+      const confirmLogout = confirm("Är du säker du vill logga ut?");
       if (confirmLogout) {
         sessionStorage.removeItem("login");
-        setLogin(!login)
+        setLogin(!login);
       }
-    }
-    else{
-      console.log(name)
-      setLogin(oldState => {
-        setUsername(name)
-        return !oldState
+    } else {
+      console.log(name);
+      setLogin((oldState) => {
+        setUsername(name);
+        return !oldState;
       });
-
     }
-    
   };
 
-
+  //TODO registrera ny användare
   const toShow = login ? (
-    <TodoList changeLogin={changeLoginState} username={username}/>
+    <TodoList changeLogin={changeLoginState} username={username} />
   ) : (
-    <Login changeLogin={changeLoginState}  />
+    <Login changeLogin={changeLoginState} />
   );
 
   return <div className="App">{toShow}</div>;

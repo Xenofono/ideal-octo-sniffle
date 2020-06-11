@@ -14,7 +14,7 @@ const TodoList = (props) => {
       await setTodos(todosArray);
       await setLoaded(true);
     };
-    if (todos.length === 0) fetchTodos();
+    if (todos.length === 0 && !loaded) fetchTodos();
   });
 
   const toggleTodoDone = async (id) => {
