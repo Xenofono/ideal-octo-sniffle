@@ -16,10 +16,9 @@ export const getAllTodos = async (username) => {
   return Promise.resolve(todoArray);
 };
 
-export const handleToggleTodoDone = async (todo) => {
-  const todoCopy = { ...todo };
-  todoCopy.done = !todoCopy.done;
-  const response = await fetch(`${DB_URL}/${todoCopy.id}.json`, {
+export const handleToggleTodoDone = async (username, todo) => {
+  const todoCopy = { done:!todo.done };
+  const response = await fetch(`${DB_URL}/${username}/todos/${todo.id}.json`, {
     method: "PATCH",
     body: JSON.stringify(todoCopy),
   });
@@ -46,6 +45,20 @@ export const handleDeleteTodo = async (username, todo) => {
       return false;
     }
   };
+
+
+export const handleNewTodo = async (username, todo) => {
+  const todoObject = { 
+    content: todo,
+    done: false
+  }
+  const response = await fetch(`${DB_URL}/${username}/todos.json`, {
+    method: "POST",
+    body: JSON.stringify(todoObject)
+  });
+  const data = await response.json();
+  return data;
+}
 
 // const todo = {
 //     content: "react",

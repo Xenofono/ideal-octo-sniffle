@@ -5,28 +5,46 @@
   -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
   box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+  min-width:50%;
 }
 
-Link{
-  margin-top: 2rem;
-  height: 2rem;
+.TodoList h1{
+  text-align: center;
+  color: white;
+}
+
+.btn{
   background: #222222;
   color: #ccc;
   font-size: 1.5rem;
   outline: none;
   border: none;
-}
-
-.TodoList button {
-  margin-top: 2rem;
   height: 2rem;
-  background: #222222;
-  color: #ccc;
-  font-size: 1.5rem;
-  outline: none;
-  border: none;
 
 }
+
+.new-todo{
+  width:100%;
+  margin-bottom:2rem;
+  border-bottom: 1px solid #ccc;
+  display:flex;
+}
+
+.new-todo input{
+  width:20rem;
+  height:1.4rem;
+  margin: 0;
+  outline: none;
+  padding: 0.2rem;
+
+}
+
+.new-todo .btn{
+  margin-top: 0;
+}
+
+
+
 
 .TodoList button:hover{
     color: #222222;

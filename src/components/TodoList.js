@@ -7,11 +7,13 @@ import {
   handleToggleTodoDone,
   getAllTodos,
   handleDeleteTodo,
+  handleNewTodo
 } from "../FirebaseTodos";
 
 const TodoList = (props) => {
   const [todos, setTodos] = useState([]);
   const [loaded, setLoaded] = useState(false);
+  const [newTodoInput, setNewTodoInput] = useState("");
   const history = useHistory();
 
   useEffect(() => {
@@ -25,15 +27,17 @@ const TodoList = (props) => {
 
   const toggleTodoDone = async (id) => {
     const todoToToggle = todos.find((todo) => todo.id === id);
-    const toggled = await handleToggleTodoDone(todoToToggle);
+    const toggled = await handleToggleTodoDone(props.username, todoToToggle);
     if (toggled) {
-      const newTodos = todos.map((todo) => {
-        if (todo.id === id) {
-          todo.done = !todo.done;
+      const newTodos = todos
+        .map((todo) => {
+          if (todo.id === id) {
+            todo.done = !todo.done;
+            return todo;
+          }
           return todo;
-        }
-        return todo;
-      });
+        })
+        .sort((a, b) => a.done - b.done);
       setTodos(newTodos);
     }
   };
@@ -44,6 +48,29 @@ const TodoList = (props) => {
     if (deleted) {
       const newTodos = todos.filter((todo) => todo.id !== id);
       setTodos(newTodos);
+    }
+  };
+
+  const sendNewTodo = async() => {
+    if(newTodoInput === ""){
+      alert("Tom todo tillåts ej");
+      return;
+    }
+    const newTodoId = await handleNewTodo(props.username,newTodoInput)
+    const newTodos = [...todos, {content:newTodoInput, done:false, id:newTodoId.name}].sort((a, b) => a.done - b.done);
+    setTodos(newTodos)
+    setNewTodoInput("")
+  }
+
+
+
+  const logout = () => {
+    const confirmLogout = confirm("Är du säker du vill logga ut?");
+    if (confirmLogout) {
+      sessionStorage.removeItem("login");
+      sessionStorage.removeItem("user");
+      history.push("/");
+      props.changeLogin();
     }
   };
 
@@ -63,20 +90,23 @@ const TodoList = (props) => {
     <p>LOADING</p>
   );
 
-  const logout = () => {
-    const confirmLogout = confirm("Är du säker du vill logga ut?");
-    if (confirmLogout) {
-      sessionStorage.removeItem("login");
-      history.push("/")
-      props.changeLogin();
-    }
-  };
-
-  return  (
+  return (
     <div className="TodoList">
-      <h2>{props.username}s todos</h2>
+      <h1>{props.username.toUpperCase()}S TODOS</h1>
+      <div className="new-todo">
+        <input
+          type="text"
+          placeholder="Ny todo"
+          value={newTodoInput}
+          onChange={(e) => setNewTodoInput(e.target.value)}
+        />
+        <button className="btn" onClick={sendNewTodo}>Skicka</button>
+      </div>
+
       {toShow}
-      <button onClick={logout}>Logga ut</button>
+      <button onClick={logout} className="btn">
+        Logga ut
+      </button>
     </div>
   );
 };
