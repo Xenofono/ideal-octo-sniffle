@@ -1,12 +1,18 @@
 import React, { useState, useEffect } from "react";
+import { Link, Redirect, useHistory } from "react-router-dom";
 import "../styles/TodoList.css";
 
 import Todo from "./Todo";
-import { handleToggleTodoDone, getAllTodos, handleDeleteTodo } from "../FirebaseTodos";
+import {
+  handleToggleTodoDone,
+  getAllTodos,
+  handleDeleteTodo,
+} from "../FirebaseTodos";
 
 const TodoList = (props) => {
   const [todos, setTodos] = useState([]);
   const [loaded, setLoaded] = useState(false);
+  const history = useHistory();
 
   useEffect(() => {
     const fetchTodos = async () => {
@@ -33,13 +39,13 @@ const TodoList = (props) => {
   };
 
   const deleteTodo = async (id) => {
-    const todoToDelete = todos.find(todo => todo.id === id)
-    const deleted = await handleDeleteTodo(todoToDelete)
-    if(deleted){
-      const newTodos = todos.filter(todo => todo.id !== id)
-      setTodos(newTodos)
+    const todoToDelete = todos.find((todo) => todo.id === id);
+    const deleted = await handleDeleteTodo(todoToDelete);
+    if (deleted) {
+      const newTodos = todos.filter((todo) => todo.id !== id);
+      setTodos(newTodos);
     }
-  }
+  };
 
   const toShow = loaded ? (
     <React.Fragment>
@@ -57,10 +63,19 @@ const TodoList = (props) => {
     <p>LOADING</p>
   );
 
-  return (
+  const logout = () => {
+    const confirmLogout = confirm("Är du säker du vill logga ut?");
+    if (confirmLogout) {
+      sessionStorage.removeItem("login");
+      history.push("/")
+      props.changeLogin();
+    }
+  };
+
+  return  (
     <div className="TodoList">
       {toShow}
-      <button onClick={() => props.changeLogin()}>Logga ut</button>
+      <button onClick={logout}>Logga ut</button>
     </div>
   );
 };
