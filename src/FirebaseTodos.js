@@ -33,8 +33,8 @@ export const handleToggleTodoDone = async (todo) => {
   }
 };
 
-export const handleDeleteTodo = async (todo) => {
-    const response = await fetch(`${DB_URL}/${todo.id}.json`, {
+export const handleDeleteTodo = async (username, todo) => {
+    const response = await fetch(`${DB_URL}/${username}/todos/${todo.id}.json`, {
       method: "DELETE"
     });
     console.log(response.status)

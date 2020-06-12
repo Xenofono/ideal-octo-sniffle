@@ -5,6 +5,8 @@ import "../styles/App.css";
 
 import TodoList from "./TodoList";
 import Login from "./Login";
+import NewUser from './NewUser'
+
 
 const App = () => {
   const alreadyLoggedIn = sessionStorage.getItem("login") === "yes";
@@ -32,6 +34,8 @@ const App = () => {
       {login ? <Redirect to="/todos"></Redirect>: null}
     </Route>
     <Route path="/todos" exact component={() => <TodoList changeLogin={changeLoginState} username={username}></TodoList>}/>
+    <Route path="/new-user" component={NewUser}></Route>
+    
     </div>;
 };
 

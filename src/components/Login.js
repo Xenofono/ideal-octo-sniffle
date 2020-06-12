@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import {Route, Link, useHistory} from 'react-router-dom'
 import "../styles/Login.css";
 import { login, newAccount } from "../FirebaseLogin";
 
 export default function Login(props) {
   const [nameInput, setNameInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
+  const history = useHistory();
 
   const onClick = async (e) => {
     e.preventDefault();
@@ -44,10 +46,11 @@ export default function Login(props) {
         <input type="submit" value="Logga in" onClick={onClick}></input>
       <button onClick={(e) => {
         e.preventDefault()
-        newAccount()
+        history.push("/new-user")
       }}>Nytt konto</button>
 
       </form>
+
     </div>
   );
 }

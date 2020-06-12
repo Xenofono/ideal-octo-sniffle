@@ -40,7 +40,7 @@ const TodoList = (props) => {
 
   const deleteTodo = async (id) => {
     const todoToDelete = todos.find((todo) => todo.id === id);
-    const deleted = await handleDeleteTodo(todoToDelete);
+    const deleted = await handleDeleteTodo(props.username, todoToDelete);
     if (deleted) {
       const newTodos = todos.filter((todo) => todo.id !== id);
       setTodos(newTodos);
@@ -74,6 +74,7 @@ const TodoList = (props) => {
 
   return  (
     <div className="TodoList">
+      <h2>{props.username}s todos</h2>
       {toShow}
       <button onClick={logout}>Logga ut</button>
     </div>
