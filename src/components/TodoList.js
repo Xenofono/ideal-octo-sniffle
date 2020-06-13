@@ -3,6 +3,7 @@ import { Link, Redirect, useHistory } from "react-router-dom";
 import "../styles/TodoList.css";
 
 import Todo from "./Todo";
+import Input from "./Input";
 import {
   handleEditTodo,
   getAllTodos,
@@ -15,7 +16,7 @@ const TodoList = (props) => {
   const [loaded, setLoaded] = useState(false);
   const [newTodoInput, setNewTodoInput] = useState("");
   const [editMode, setEditMode] = useState(false);
-  const [todoToEdit, setTodoToEdit] = useState(null)
+  const [todoToEdit, setTodoToEdit] = useState(null);
   const history = useHistory();
 
   useEffect(() => {
@@ -26,6 +27,25 @@ const TodoList = (props) => {
     };
     if (todos.length === 0 && !loaded) fetchTodos();
   });
+
+  const addNewTodo = (content, id) => {
+    const newTodos = [...todos, { content, done: false, id }].sort(
+      (a, b) => a.done - b.done);
+    setTodos(newTodos);
+  };
+
+  const adjustEditedTodo = (editedTodo) => {
+    setEditMode((old) => {
+      const newTodos = todos.map((todo) => {
+        if (todo.id === editedTodo.id) {
+          todo.content = editedTodo.content;
+        }
+        return todo;
+      });
+      setTodos(newTodos);
+      setTodoToEdit(null);
+      return false;
+  })}
 
   const toggleTodoDone = async (id) => {
     const todoToToggle = todos.find((todo) => todo.id === id);
@@ -53,51 +73,27 @@ const TodoList = (props) => {
     }
   };
 
-  const sendNewTodo = async () => {
-    if (newTodoInput === "") {
-      alert("Tom todo tillåts ej");
-      return;
-    }
-    const newTodoId = await handleNewTodo(props.username, newTodoInput);
-    const newTodos = [
-      ...todos,
-      { content: newTodoInput, done: false, id: newTodoId.name },
-    ].sort((a, b) => a.done - b.done);
-    setTodos(newTodos);
-    setNewTodoInput("");
-  };
 
   const toggleEdit = (id) => {
     const todoToEdit = todos.find((todo) => todo.id === id);
-    if (!editMode) {
-      setEditMode((oldEdit) => {
-        setNewTodoInput(todoToEdit.content);
+    if(!editMode){
+      setEditMode(old => {
         setTodoToEdit(todoToEdit)
-        return !oldEdit;
-      });
-    } else {
-      setNewTodoInput(todoToEdit.content);
+        return true;
+      })
+    }
+    else{
+      setTodoToEdit(todoToEdit)
     }
   };
 
-  const sendEdit = async () => {
-    const editedTodo = {...todoToEdit, content:newTodoInput}
-    const edited = await handleEditTodo(props.username, editedTodo, true)
-    if(edited){
-      setEditMode(old => {
-        const newTodos = todos.map(todo => {
-          if(todo.id === editedTodo.id){
-            todo.content = editedTodo.content
-          }
-          return todo;
-        });
-        setTodos(newTodos)
-        setNewTodoInput("")
-        setTodoToEdit(null)
-        return false;
-      })
-    }
+  const disableEdit = () => {
+    setEditMode(old => {
+      setTodoToEdit(null);
+      return false;
+    });
   };
+
 
   const logout = () => {
     const confirmLogout = confirm("Är du säker du vill logga ut?");
@@ -119,8 +115,7 @@ const TodoList = (props) => {
           done={todo.done}
           toggleDone={toggleTodoDone}
           delete={deleteTodo}
-          edit={toggleEdit}
-        ></Todo>
+          edit={toggleEdit}></Todo>
       ))}
     </React.Fragment>
   ) : (
@@ -130,23 +125,12 @@ const TodoList = (props) => {
   return (
     <div className="TodoList">
       <h1>{props.username.toUpperCase()}S TODOS</h1>
-      <div className="new-todo">
-        <input
-          type="text"
-          placeholder="Ny todo"
-          value={newTodoInput}
-          onChange={(e) => setNewTodoInput(e.target.value)}
-        />
-
-        <button className="btn" onClick={editMode ? sendEdit : sendNewTodo}>
-          {editMode ? "Ändra" : "Skicka"}
-        </button>
-        {editMode ? (
-          <button className="btn" onClick={() => setEditMode(false)}>
-            X
-          </button>
-        ) : null}
-      </div>
+      <Input
+        buttonAction={editMode ? adjustEditedTodo : addNewTodo}
+        username={props.username}
+        edit={editMode}
+        todoToEdit={todoToEdit}
+        disableEdit={disableEdit}></Input>
 
       {toShow}
       <button onClick={logout} className="btn">
