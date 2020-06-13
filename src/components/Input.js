@@ -4,11 +4,16 @@ import { handleEditTodo, handleNewTodo } from "../FirebaseTodos";
 
 const Input = (props) => {
   const [newTodoInput, setNewTodoInput] = useState("");
+  const [todoEditId, setTodoEditId] = useState("")
+
+
 
   useEffect(() => {
-    if (props.todoToEdit && newTodoInput === "") {
+    if (props.todoToEdit && props.todoToEdit.id !== todoEditId) {
       setNewTodoInput(props.todoToEdit.content);
+      setTodoEditId(props.todoToEdit.id)
     }
+
   });
 
   const sendNewTodo = async () => {
@@ -29,10 +34,11 @@ const Input = (props) => {
     if (edited) {
       props.buttonAction(editedTodo);
       setNewTodoInput("");
+      setTodoEditId("")
     }
   };
 
-  const closeEdit = props.edit ? (
+  const closeEdit = props.todoToEdit ? (
     <button
       className="btn"
       onClick={() => {
@@ -52,8 +58,8 @@ const Input = (props) => {
         onChange={(e) => setNewTodoInput(e.target.value)}
       />
 
-      <button className="btn" onClick={props.edit ? sendEdit : sendNewTodo}>
-        {props.edit ? "Ändra" : "Skicka"}
+      <button className="btn" onClick={props.todoToEdit ? sendEdit : sendNewTodo}>
+        {props.todoToEdit ? "Ändra" : "Skicka"}
       </button>
       {closeEdit}
     </div>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, Redirect, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import "../styles/TodoList.css";
 
 import Todo from "./Todo";
@@ -8,13 +8,11 @@ import {
   handleEditTodo,
   getAllTodos,
   handleDeleteTodo,
-  handleNewTodo,
 } from "../FirebaseTodos";
 
 const TodoList = (props) => {
   const [todos, setTodos] = useState([]);
   const [loaded, setLoaded] = useState(false);
-  const [editMode, setEditMode] = useState(false);
   const [todoToEdit, setTodoToEdit] = useState(null);
   const history = useHistory();
 
@@ -33,12 +31,9 @@ const TodoList = (props) => {
   */
   const addOrEditTodo = (todoToAdd) => {
     let newTodos = todos;
-    if (editMode) {
+    if (todoToEdit) {
       newTodos = newTodos.filter((todo) => todo.id !== todoToAdd.id);
-      setEditMode((old) => {
-        setTodoToEdit(null);
-        return false;
-      });
+      setTodoToEdit(null);
     }
     newTodos = [...newTodos, todoToAdd].sort((a, b) => a.done - b.done);
     setTodos(newTodos);
@@ -73,23 +68,9 @@ const TodoList = (props) => {
   const toggleEdit = (id) => {
     const todoToEdit = todos.find((todo) => todo.id === id);
     setTodoToEdit(todoToEdit);
-
-    // if (!editMode) {
-    //   setEditMode((old) => {
-    //     setTodoToEdit(todoToEdit);
-    //     return true;
-    //   });
-    // } else {
-    //   setTodoToEdit(todoToEdit);
-    // }
   };
 
-  const disableEdit = () => {
-    setEditMode((old) => {
-      setTodoToEdit(null);
-      return false;
-    });
-  };
+  const disableEdit = () => setTodoToEdit(null);
 
   const logout = () => {
     const confirmLogout = confirm("Är du säker du vill logga ut?");
@@ -124,7 +105,6 @@ const TodoList = (props) => {
       <Input
         buttonAction={addOrEditTodo}
         username={props.username}
-        edit={editMode}
         todoToEdit={todoToEdit}
         disableEdit={disableEdit}></Input>
 
