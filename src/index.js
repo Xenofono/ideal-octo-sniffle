@@ -5,11 +5,11 @@ import App from "./components/App";
 
 let app = document.getElementById("app");
 
-app
-  ? ReactDOM.render(
-      <BrowserRouter>
-        <App></App>
-      </BrowserRouter>,
-      app
-    )
-  : false;
+if (app) {
+  ReactDOM.render(
+    <BrowserRouter>
+      <App></App>
+    </BrowserRouter>,
+    app
+  );
+}

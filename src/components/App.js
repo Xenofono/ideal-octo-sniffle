@@ -20,7 +20,7 @@ const App = () => {
 
   return (
     <div className="App">
-      {username ? <Redirect to="/todos"></Redirect> : "/"}
+      {username ? <Redirect to="/todos"></Redirect> : null}
 
       <Route
         path="/"
