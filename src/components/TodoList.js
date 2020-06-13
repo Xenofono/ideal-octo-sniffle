@@ -26,9 +26,7 @@ const TodoList = (props) => {
     if (!loaded) fetchTodos();
   });
 
-  /*
-  Om todoToEdit är truthy så tar vi bort den ursprungliga innan nya läggs till
-  */
+  
   const todosHelper = (todoToAdd) => {
     const todosWithoutOldTodo = todos.filter(
       (todo) => todo.id !== todoToAdd.id
