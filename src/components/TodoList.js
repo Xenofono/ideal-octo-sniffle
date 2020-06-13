@@ -23,36 +23,29 @@ const TodoList = (props) => {
       setTodos(todosArray);
       setLoaded(true);
     };
-    if (todos.length === 0 && !loaded) fetchTodos();
+    if (!loaded) fetchTodos();
   });
 
   /*
   Om todoToEdit är truthy så tar vi bort den ursprungliga innan nya läggs till
   */
+  const todosHelper = (todoToAdd) => {
+    const todosWithoutOldTodo = todos.filter(
+      (todo) => todo.id !== todoToAdd.id
+    );
+    return [...todosWithoutOldTodo, todoToAdd].sort((a, b) => a.done - b.done);
+  };
+
   const addOrEditTodo = (todoToAdd) => {
-    let newTodos = todos;
-    if (todoToEdit) {
-      newTodos = newTodos.filter((todo) => todo.id !== todoToAdd.id);
-      setTodoToEdit(null);
-    }
-    newTodos = [...newTodos, todoToAdd].sort((a, b) => a.done - b.done);
-    setTodos(newTodos);
+    setTodos(todosHelper(todoToAdd));
   };
 
   const toggleTodoDone = async (id) => {
     const todoToToggle = todos.find((todo) => todo.id === id);
-    const toggled = await handleEditTodo(props.username, todoToToggle);
+    const newTodo = { ...todoToToggle };
+    const toggled = await handleEditTodo(props.username, newTodo);
     if (toggled) {
-      const newTodos = todos
-        .map((todo) => {
-          if (todo.id === id) {
-            todo.done = !todo.done;
-            return todo;
-          }
-          return todo;
-        })
-        .sort((a, b) => a.done - b.done);
-      setTodos(newTodos);
+      setTodos(todosHelper({ ...newTodo, done: !newTodo.done }));
     }
   };
 

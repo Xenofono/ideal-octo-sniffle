@@ -19,6 +19,7 @@ export const getAllTodos = async (username) => {
 //används för både ändra status done och innehåll, bestäms av boolean edit
 export const handleEditTodo = async (username, todo, edit = false) => {
   const todoCopy = edit ? { content: todo.content } : { done: !todo.done };
+  console.log(todoCopy)
   const response = await fetch(`${DB_URL}/${username}/todos/${todo.id}.json`, {
     method: "PATCH",
     body: JSON.stringify(todoCopy),
@@ -55,13 +56,3 @@ export const handleNewTodo = async (username, todo) => {
   const data = await response.json();
   return data;
 };
-
-// const todo = {
-//     content: "react",
-//     done: false,
-// }
-
-// fetch("https://sti-todo-app.firebaseio.com/users/kristoffer/todos"+".json", {
-//     method: "POST",
-//     body: JSON.stringify(todo)
-// })
