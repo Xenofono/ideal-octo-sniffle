@@ -27,7 +27,7 @@ const TodoList = (props) => {
   });
 
   /*
-  Om editmode är true så tar vi bort den ursprungliga innan nya läggs till
+  Om todoToEdit är truthy så tar vi bort den ursprungliga innan nya läggs till
   */
   const addOrEditTodo = (todoToAdd) => {
     let newTodos = todos;
