@@ -15,6 +15,11 @@ export default function Todo(props) {
     props.delete(props.id);
   };
 
+  const handleEditClick = (e) => {
+    e.stopPropagation();
+    props.edit(props.id)
+  }
+
   return (
     <div className={cssClass} onClick={() => props.toggleDone(props.id)}>
       {props.content}
@@ -24,7 +29,8 @@ export default function Todo(props) {
         onClick={handleDeleteClick}></FontAwesomeIcon>
       <FontAwesomeIcon
         icon={faPen}
-        className={["edit", "icon"].join(" ")}></FontAwesomeIcon>
+        className={["edit", "icon"].join(" ")}
+        onClick={handleEditClick}></FontAwesomeIcon>
     </div>
   );
 }
