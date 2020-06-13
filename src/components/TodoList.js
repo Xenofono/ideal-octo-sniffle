@@ -21,15 +21,17 @@ const TodoList = (props) => {
   useEffect(() => {
     const fetchTodos = async () => {
       const todosArray = await getAllTodos(props.username);
-      await setTodos(todosArray);
-      await setLoaded(true);
+      todosArray.sort((a, b) => a.done - b.done);
+      setTodos(todosArray);
+      setLoaded(true);
     };
     if (todos.length === 0 && !loaded) fetchTodos();
   });
 
   const addNewTodo = (content, id) => {
     const newTodos = [...todos, { content, done: false, id }].sort(
-      (a, b) => a.done - b.done);
+      (a, b) => a.done - b.done
+    );
     setTodos(newTodos);
   };
 
@@ -44,7 +46,8 @@ const TodoList = (props) => {
       setTodos(newTodos);
       setTodoToEdit(null);
       return false;
-  })}
+    });
+  };
 
   const toggleTodoDone = async (id) => {
     const todoToToggle = todos.find((todo) => todo.id === id);
@@ -72,27 +75,24 @@ const TodoList = (props) => {
     }
   };
 
-
   const toggleEdit = (id) => {
     const todoToEdit = todos.find((todo) => todo.id === id);
-    if(!editMode){
-      setEditMode(old => {
-        setTodoToEdit(todoToEdit)
+    if (!editMode) {
+      setEditMode((old) => {
+        setTodoToEdit(todoToEdit);
         return true;
-      })
-    }
-    else{
-      setTodoToEdit(todoToEdit)
+      });
+    } else {
+      setTodoToEdit(todoToEdit);
     }
   };
 
   const disableEdit = () => {
-    setEditMode(old => {
+    setEditMode((old) => {
       setTodoToEdit(null);
       return false;
     });
   };
-
 
   const logout = () => {
     const confirmLogout = confirm("Är du säker du vill logga ut?");
