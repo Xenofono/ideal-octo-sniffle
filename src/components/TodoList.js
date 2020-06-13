@@ -28,25 +28,20 @@ const TodoList = (props) => {
     if (todos.length === 0 && !loaded) fetchTodos();
   });
 
-  const addNewTodo = (content, id) => {
-    const newTodos = [...todos, { content, done: false, id }].sort(
-      (a, b) => a.done - b.done
-    );
-    setTodos(newTodos);
-  };
-
-  const adjustEditedTodo = (editedTodo) => {
-    setEditMode((old) => {
-      const newTodos = todos.map((todo) => {
-        if (todo.id === editedTodo.id) {
-          todo.content = editedTodo.content;
-        }
-        return todo;
+  /*
+  Om editmode är true så tar vi bort den ursprungliga innan nya läggs till
+  */
+  const addOrEditTodo = (todoToAdd) => {
+    let newTodos = todos;
+    if (editMode) {
+      newTodos = newTodos.filter((todo) => todo.id !== todoToAdd.id);
+      setEditMode((old) => {
+        setTodoToEdit(null);
+        return false;
       });
-      setTodos(newTodos);
-      setTodoToEdit(null);
-      return false;
-    });
+    }
+    newTodos = [...newTodos, todoToAdd].sort((a, b) => a.done - b.done);
+    setTodos(newTodos);
   };
 
   const toggleTodoDone = async (id) => {
@@ -77,14 +72,16 @@ const TodoList = (props) => {
 
   const toggleEdit = (id) => {
     const todoToEdit = todos.find((todo) => todo.id === id);
-    if (!editMode) {
-      setEditMode((old) => {
-        setTodoToEdit(todoToEdit);
-        return true;
-      });
-    } else {
-      setTodoToEdit(todoToEdit);
-    }
+    setTodoToEdit(todoToEdit);
+
+    // if (!editMode) {
+    //   setEditMode((old) => {
+    //     setTodoToEdit(todoToEdit);
+    //     return true;
+    //   });
+    // } else {
+    //   setTodoToEdit(todoToEdit);
+    // }
   };
 
   const disableEdit = () => {
@@ -125,7 +122,7 @@ const TodoList = (props) => {
     <div className="TodoList">
       <h1>{props.username.toUpperCase()}S TODOS</h1>
       <Input
-        buttonAction={editMode ? adjustEditedTodo : addNewTodo}
+        buttonAction={addOrEditTodo}
         username={props.username}
         edit={editMode}
         todoToEdit={todoToEdit}

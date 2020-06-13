@@ -16,8 +16,10 @@ const Input = (props) => {
       alert("Tom todo tillåts ej");
       return;
     }
-    const newTodoId = await handleNewTodo(props.username, newTodoInput);
-    props.buttonAction(newTodoInput, newTodoId.name);
+    const newTodo = {done: false, content:newTodoInput}
+    const newTodoId = await handleNewTodo(props.username, newTodo);
+    newTodo.id = newTodoId.name
+    props.buttonAction(newTodo);
     setNewTodoInput("");
   };
 

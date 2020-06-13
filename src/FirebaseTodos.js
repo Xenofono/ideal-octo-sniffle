@@ -48,13 +48,9 @@ export const handleDeleteTodo = async (username, todo) => {
 };
 
 export const handleNewTodo = async (username, todo) => {
-  const todoObject = {
-    content: todo,
-    done: false,
-  };
   const response = await fetch(`${DB_URL}/${username}/todos.json`, {
     method: "POST",
-    body: JSON.stringify(todoObject),
+    body: JSON.stringify(todo),
   });
   const data = await response.json();
   return data;
