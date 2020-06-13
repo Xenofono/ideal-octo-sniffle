@@ -1,13 +1,22 @@
 body{
     margin: 0;
+    font-family: 'Open Sans', sans-serif;
 }
 
 .App{
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
     display:flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     background: linear-gradient(#b7f8DB, #50a7c2);
 
+}
+
+.title{
+    font-size: 3rem;
+    font-weight:400;
+    letter-spacing: 2px;
+    color: #111111;
 }
