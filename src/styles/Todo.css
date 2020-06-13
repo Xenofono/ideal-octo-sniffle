@@ -18,17 +18,24 @@
 .icon:hover,
 .icon:focus,
 .icon:active {
-  color: #ccc;
   font-size:2rem;
   
 }
 
 .remove {
-  top: -20px;
+  top: 0px;
+}
+
+.remove:hover, .remove:focus, .remove:active{
+  color: #FF4136;
 }
 
 .edit {
-  top: 50px;
+  bottom: 0px;
+}
+
+.edit:hover, .edit:focus, .edit:active{
+  color: #01FF70;
 }
 
 .Todo {
@@ -36,6 +43,7 @@
 
 .Done {
   text-decoration: line-through;
+  opacity: 0.4;
 }
 
 .Todo:hover,
