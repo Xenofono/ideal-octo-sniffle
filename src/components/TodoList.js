@@ -14,7 +14,6 @@ import {
 const TodoList = (props) => {
   const [todos, setTodos] = useState([]);
   const [loaded, setLoaded] = useState(false);
-  const [newTodoInput, setNewTodoInput] = useState("");
   const [editMode, setEditMode] = useState(false);
   const [todoToEdit, setTodoToEdit] = useState(null);
   const history = useHistory();
