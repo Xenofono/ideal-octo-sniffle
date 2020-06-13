@@ -4,7 +4,7 @@ export const getAllTodos = async (username) => {
   const response = await fetch(`${DB_URL}/${username}/todos.json`);
   const data = await response.json();
   const todoArray = [];
-  if(!data) return Promise.resolve(todoArray)
+  if (!data) return Promise.resolve(todoArray);
   Object.entries(data).forEach((todo) => {
     const todoObj = {
       id: todo[0],
@@ -16,16 +16,17 @@ export const getAllTodos = async (username) => {
   return Promise.resolve(todoArray);
 };
 
-export const handleToggleTodoDone = async (username, todo) => {
-  const todoCopy = { done:!todo.done };
+//används för både ändra status done och innehåll, bestäms av boolean edit
+export const handleEditTodo = async (username, todo, edit = false) => {
+  const todoCopy = edit ? { content: todo.content } : { done: !todo.done };
   const response = await fetch(`${DB_URL}/${username}/todos/${todo.id}.json`, {
     method: "PATCH",
     body: JSON.stringify(todoCopy),
   });
-  console.log(response.status)
+  console.log(response.status);
   if (response.status === 200) {
     const data = await response.json();
-    console.log(data)
+    console.log(data);
     return true;
   } else {
     return false;
@@ -33,32 +34,31 @@ export const handleToggleTodoDone = async (username, todo) => {
 };
 
 export const handleDeleteTodo = async (username, todo) => {
-    const response = await fetch(`${DB_URL}/${username}/todos/${todo.id}.json`, {
-      method: "DELETE"
-    });
-    console.log(response.status)
-    if (response.status === 200) {
-      const data = await response.json();
-      console.log(data)
-      return true;
-    } else {
-      return false;
-    }
-  };
-
+  const response = await fetch(`${DB_URL}/${username}/todos/${todo.id}.json`, {
+    method: "DELETE",
+  });
+  console.log(response.status);
+  if (response.status === 200) {
+    const data = await response.json();
+    console.log(data);
+    return true;
+  } else {
+    return false;
+  }
+};
 
 export const handleNewTodo = async (username, todo) => {
-  const todoObject = { 
+  const todoObject = {
     content: todo,
-    done: false
-  }
+    done: false,
+  };
   const response = await fetch(`${DB_URL}/${username}/todos.json`, {
     method: "POST",
-    body: JSON.stringify(todoObject)
+    body: JSON.stringify(todoObject),
   });
   const data = await response.json();
   return data;
-}
+};
 
 // const todo = {
 //     content: "react",
