@@ -20,6 +20,7 @@ const App = () => {
 
   return (
     <div className="App">
+      <h1 className="title">Super Todo-manager 3000</h1>
       {username ? <Redirect to="/todos"></Redirect> : null}
 
       <Route
