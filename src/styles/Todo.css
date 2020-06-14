@@ -38,9 +38,6 @@
   color: #01FF70;
 }
 
-.Todo {
-}
-
 .Done {
   text-decoration: line-through;
   opacity: 0.4;
