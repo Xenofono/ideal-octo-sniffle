@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import {Route, Link, useHistory} from 'react-router-dom'
+import {useHistory} from 'react-router-dom'
 import "../styles/Login.css";
-import { login, newAccount } from "../FirebaseLogin";
+import { login } from "../FirebaseLogin";
 
 export default function Login(props) {
   const [nameInput, setNameInput] = useState("");
