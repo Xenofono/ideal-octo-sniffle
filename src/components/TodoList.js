@@ -23,8 +23,9 @@ const TodoList = (props) => {
       setTodos(todosArray);
       setLoaded(true);
     };
-    if (!loaded) fetchTodos();
-  });
+    fetchTodos()
+    // if (!loaded) fetchTodos();
+  }, [props.username]);
 
   
   const todosHelper = (todoToAdd) => {
@@ -95,7 +96,6 @@ const TodoList = (props) => {
       <h1>{props.username.toUpperCase()}S TODOS</h1>
       <Input
         buttonAction={addOrEditTodo}
-        username={props.username}
         todoToEdit={todoToEdit}
         disableEdit={disableEdit}></Input>
 
