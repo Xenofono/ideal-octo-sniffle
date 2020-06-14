@@ -7,17 +7,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Todo = (props) => {
   let cssClass = "Default";
+  if(props.done) cssClass += " Done"
 
-  cssClass += props.done ? " Done" : " Todo";
-
-  const handleDeleteClick = (e) => {
+  const handleClick = (e, cb) => {
     e.stopPropagation();
-    props.delete(props.id);
-  };
-
-  const handleEditClick = (e) => {
-    e.stopPropagation();
-    props.edit(props.id)
+    cb(props.id)
   }
 
   return (
@@ -26,11 +20,11 @@ const Todo = (props) => {
       <FontAwesomeIcon
         icon={faTrash}
         className={["remove", "icon"].join(" ")}
-        onClick={handleDeleteClick}></FontAwesomeIcon>
+        onClick={(e) => handleClick(e, props.delete)}></FontAwesomeIcon>
       <FontAwesomeIcon
         icon={faPen}
         className={["edit", "icon"].join(" ")}
-        onClick={handleEditClick}></FontAwesomeIcon>
+        onClick={(e) => handleClick(e, props.edit)}></FontAwesomeIcon>
     </div>
   );
 }
