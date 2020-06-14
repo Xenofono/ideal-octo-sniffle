@@ -5,7 +5,7 @@
   -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
   box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
-  min-width:50%;
+  
   margin-bottom: 3rem;
 }
 
@@ -50,4 +50,17 @@
 .TodoList button:hover{
     color: #222222;
     background: #ccc;
+}
+
+
+@media screen and (max-width:640px){
+  .TodoList{
+      width:70%;
+      padding: 1rem;
+  }
+
+  .btn{
+    font-size: 0.8rem;
+    padding:5px;
+  }
 }

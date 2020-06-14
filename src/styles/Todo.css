@@ -5,7 +5,10 @@
   margin-top: 2rem;
   padding: 1rem;
   position: relative;
-  min-width:15rem;
+}
+
+.Default p{
+ margin:0;
 }
 
 .icon {
@@ -43,9 +46,9 @@
   opacity: 0.4;
 }
 
-.Todo:hover,
-.Todo:focus,
-.Todo:active {
+.Default:hover,
+.Default:focus,
+.Default:active {
   -webkit-animation-name: wobble-vertical-on-hover;
   animation-name: wobble-vertical-on-hover;
   -webkit-animation-duration: 1s;
@@ -117,4 +120,18 @@
   -webkit-transform: perspective(1px) translateZ(0);
   transform: perspective(1px) translateZ(0);
   box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+}
+
+
+@media screen and (max-width:640px){
+  .Default{
+      padding: 0.5rem;
+      font-size:0.8rem;
+      border: none;
+  }
+
+  .icon{
+    position:static;
+    margin-right: 1rem;
+  }
 }

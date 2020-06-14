@@ -16,7 +16,7 @@ const Todo = (props) => {
 
   return (
     <div className={cssClass} onClick={() => props.toggleDone(props.id)}>
-      {props.content}
+      <p>{props.content}</p>
       <FontAwesomeIcon
         icon={faTrash}
         className={["remove", "icon"].join(" ")}

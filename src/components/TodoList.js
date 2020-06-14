@@ -37,6 +37,7 @@ const TodoList = (props) => {
 
   const addOrEditTodo = (todoToAdd) => {
     setTodos(todosHelper(todoToAdd));
+    if(todoToEdit) disableEdit()
   };
 
   const toggleTodoDone = async (id) => {

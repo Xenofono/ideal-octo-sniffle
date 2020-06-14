@@ -3,6 +3,8 @@ import React, { useState, useEffect, useRef } from "react";
 import { handleEditTodo, handleNewTodo } from "../FirebaseTodos";
 import { UserContext } from "./App";
 
+import '../styles/Input.css'
+
 const Input = (props) => {
   const inputElement = useRef(null);
   const [newTodoInput, setNewTodoInput] = useState("");
@@ -49,7 +51,7 @@ const Input = (props) => {
   ) : null;
 
   return (
-    <div className="new-todo">
+    <div className="Input">
       <input
         type="text"
         placeholder="Ny todo"

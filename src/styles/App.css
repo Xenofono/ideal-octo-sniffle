@@ -20,3 +20,9 @@ body{
     letter-spacing: 2px;
     color: #111111;
 }
+
+@media screen and (max-width:640px){
+    .title{
+        font-size: 1.3rem;
+    }
+}
