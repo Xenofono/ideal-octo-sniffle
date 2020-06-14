@@ -5,7 +5,7 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export default function Todo(props) {
+const Todo = (props) => {
   let cssClass = "Default";
 
   cssClass += props.done ? " Done" : " Todo";
@@ -34,3 +34,5 @@ export default function Todo(props) {
     </div>
   );
 }
+
+export default React.memo(Todo)
