@@ -4,7 +4,9 @@ import { handleEditTodo, handleNewTodo } from "../FirebaseTodos";
 import { UserContext } from "./App";
 
 import '../styles/Input.css'
-
+/*
+Om props.todoToEdit finns så renderas editvarianten av Input, annars newtodo
+*/
 const Input = (props) => {
   const inputElement = useRef(null);
   const [newTodoInput, setNewTodoInput] = useState("");

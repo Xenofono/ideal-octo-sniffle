@@ -9,6 +9,7 @@ const Todo = (props) => {
   let cssClass = "Default";
   if(props.done) cssClass += " Done"
 
+  //handles both edit and delete, callback is passed from respesctive icon
   const handleClick = (e, cb) => {
     e.stopPropagation();
     cb(props.id)
@@ -29,4 +30,5 @@ const Todo = (props) => {
   );
 }
 
+//React memo stoppar rerendering om state inte ändrats
 export default React.memo(Todo)

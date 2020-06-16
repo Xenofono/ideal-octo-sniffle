@@ -5,6 +5,7 @@ export const getAllTodos = async (username) => {
   const data = await response.json();
   const todoArray = [];
   if (!data) return Promise.resolve(todoArray);
+  //firebase rest svarar med ett objekt, Object.entries gör den iterable
   Object.entries(data).forEach((todo) => {
     const todoObj = {
       id: todo[0],

@@ -16,6 +16,8 @@ const TodoList = (props) => {
   const [todoToEdit, setTodoToEdit] = useState(null);
   const history = useHistory();
 
+
+  //Om username ändras så körs useEffect
   useEffect(() => {
     const fetchTodos = async () => {
       const todosArray = await getAllTodos(props.username);
@@ -24,14 +26,18 @@ const TodoList = (props) => {
       setLoaded(true);
     };
     fetchTodos()
-    // if (!loaded) fetchTodos();
   }, [props.username]);
 
   
   const todosHelper = (todoToAdd) => {
+    /*
+    om todo är ny finns ej id så inget filtreras, 
+    om todo är edited eller done ändras finns id och gamla tas bort
+    */
     const todosWithoutOldTodo = todos.filter(
       (todo) => todo.id !== todoToAdd.id
     );
+    //todos sorteras efter done så färdiga hamnar längst ner
     return [...todosWithoutOldTodo, todoToAdd].sort((a, b) => a.done - b.done);
   };
 
@@ -58,6 +64,7 @@ const TodoList = (props) => {
     }
   };
 
+  //När todoToEdit inte är null är appen i edit mode
   const toggleEdit = (id) => {
     const todoToEdit = todos.find((todo) => todo.id === id);
     setTodoToEdit(todoToEdit);
@@ -65,16 +72,21 @@ const TodoList = (props) => {
 
   const disableEdit = () => setTodoToEdit(null);
 
+  /*
+  Tar bort nyckeln user från sessionStorage
+  använder react router för att pusha root routen så användaren hamnar på startsidan
+  */
   const logout = () => {
     const confirmLogout = confirm("Är du säker du vill logga ut?");
     if (confirmLogout) {
-      sessionStorage.removeItem("login");
       sessionStorage.removeItem("user");
       history.push("/");
       props.changeLogin();
     }
   };
 
+
+  //Om todos finns så renderas de, annars visas LOADING
   const toShow = loaded ? (
     <React.Fragment>
       {todos.map((todo) => (
@@ -101,7 +113,7 @@ const TodoList = (props) => {
         disableEdit={disableEdit}></Input>
 
       {toShow}
-      <button onClick={logout} className="btn">
+      <button onClick={logout} className="btn logout">
         Logga ut
       </button>
     </div>

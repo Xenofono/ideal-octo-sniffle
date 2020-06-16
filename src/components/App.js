@@ -7,7 +7,8 @@ import TodoList from "./TodoList";
 import Login from "./Login";
 import NewUser from "./NewUser";
 
-export const UserContext = React.createContext();
+//context för att skicka username till descendants utan att skicka props hela vägen
+export const UserContext = React.createContext(sessionStorage.getItem("user"));
 
 
 const App = () => {
