@@ -1,37 +1,37 @@
-.LoginForm{
-
-    display: flex;
-    flex-direction: column;
-
+.LoginForm {
+  display: flex;
+  flex-direction: column;
 }
 
-.LoginForm input{
-    margin: 1rem;
-    outline: none;
-    border: none;
-    height: 2rem;
-    padding: 1rem;
-
+.LoginForm input {
+  margin: 1rem;
+  outline: none;
+  border: none;
+  height: 2rem;
+  padding: 1rem;
 }
 
 .LoginForm input[type="submit"] {
-    letter-spacing: 0.5rem;
-    font-size: 1rem;
-    line-height: 0.3rem;
-    color: #ccc;
-    background: #111111;
+  letter-spacing: 0.5rem;
+  font-size: 1rem;
+  line-height: 0.3rem;
+  color: #ccc;
+  background: #111111;
 }
 
-button{
+.LoginForm button{
     margin: 1rem;
-    outline: none;
-    border: none;
-    height: 2rem;
-    padding: 1rem;
+}
 
-    letter-spacing: 0.5rem;
-    font-size: 1rem;
-    line-height: 0.3rem;
-    color: #ccc;
-    background: #111111;
+button {
+  outline: none;
+  border: none;
+  height: 2rem;
+  padding: 1rem;
+
+  letter-spacing: 0.5rem;
+  font-size: 1rem;
+  line-height: 0.3rem;
+  color: #ccc;
+  background: #111111;
 }

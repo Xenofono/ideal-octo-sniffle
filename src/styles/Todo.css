@@ -5,40 +5,43 @@
   margin-top: 2rem;
   padding: 1rem;
   position: relative;
+  max-width: 30rem;
+  word-wrap: break-word;
 }
 
-.Default p{
- margin:0;
+.Default p {
 }
 
 .icon {
   position: absolute;
   font-size: 1.5rem;
-  right:0px;
-
+  right: 0px;
 }
 
 .icon:hover,
 .icon:focus,
 .icon:active {
-  font-size:2rem;
-  
+  font-size: 2rem;
 }
 
 .remove {
   top: 0px;
 }
 
-.remove:hover, .remove:focus, .remove:active{
-  color: #FF4136;
+.remove:hover,
+.remove:focus,
+.remove:active {
+  color: #ff4136;
 }
 
 .edit {
   bottom: 0px;
 }
 
-.edit:hover, .edit:focus, .edit:active{
-  color: #01FF70;
+.edit:hover,
+.edit:focus,
+.edit:active {
+  color: #01ff70;
 }
 
 .Done {
@@ -122,16 +125,24 @@
   box-shadow: 0 0 1px rgba(0, 0, 0, 0);
 }
 
-
-@media screen and (max-width:640px){
-  .Default{
-      padding: 0.5rem;
-      font-size:0.8rem;
-      border: none;
+@media screen and (max-width: 640px) {
+  .Default {
+    padding: 0.5rem;
+    font-size: 0.8rem;
+    width: 21rem;
   }
 
-  .icon{
-    position:static;
-    margin-right: 1rem;
+
+  .icon {
+    position: static;
+    margin: 1rem;
+  }
+
+  .remove{
+    color: #ff4136;
+  }
+
+  .edit{
+    color: #01ff70;
   }
 }

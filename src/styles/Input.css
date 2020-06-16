@@ -1,3 +1,10 @@
+
+
+.Input{
+    display: flex;
+    justify-content: space-between;
+}
+
 .Input input[type=text]{
     width:50%;
     height: 2rem;
@@ -9,6 +16,14 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
+    }
+
+    .Input input[type=text]{
+        width:80%;
+    }
+
+    .Input button{
+        margin-top: 1rem;
     }
     
 }

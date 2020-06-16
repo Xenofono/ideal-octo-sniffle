@@ -5,62 +5,63 @@
   -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
   box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
-  
+  min-width: 30rem;
+  width: 35rem;
   margin-bottom: 3rem;
+  max-width: 37rem;
+  box-sizing: border-box;
 }
 
-.TodoList h1{
+.TodoList h1 {
   text-align: center;
   color: white;
 }
 
-.btn{
+.btn {
   background: #222222;
   color: #ccc;
   font-size: 1.5rem;
   outline: none;
   border: none;
   height: 2rem;
-
 }
 
-.new-todo{
-  width:100%;
-  margin-bottom:2rem;
+.new-todo {
+  width: 100%;
+  margin-bottom: 2rem;
   border-bottom: 1px solid #ccc;
-  display:flex;
+  display: flex;
 }
 
-.new-todo input{
-  width:20rem;
-  height:1.4rem;
+.new-todo input {
+  width: 20rem;
+  height: 1.4rem;
   margin: 0;
   outline: none;
   padding: 0.2rem;
-
 }
 
-.new-todo .btn{
+.new-todo .btn {
   margin-top: 0;
 }
 
-
-
-
-.TodoList button:hover{
-    color: #222222;
-    background: #ccc;
+.TodoList button:hover {
+  color: #222222;
+  background: #ccc;
 }
 
+.logout {
+  margin-top: 2rem;
+}
 
-@media screen and (max-width:640px){
-  .TodoList{
-      width:70%;
-      padding: 1rem;
+@media screen and (max-width: 640px) {
+  .TodoList {
+    min-width: 0px;
+    width: auto;
   }
 
-  .btn{
+  .btn {
     font-size: 0.8rem;
-    padding:5px;
+    padding: 5px;
   }
 }
